@@ -145,6 +145,14 @@ export abstract class BasePlayer extends TypedEmitter<PlayerEvents> {
                     if(e.data.event === "screenshot"){
                         window.parent?.postMessage({ event: "screenshot", commentId: e.data.id, imageUrl: this.getImageDataURL() }, "*"); // Replace '*' with the specific origin for security
                     }
+                    console.log("change theme ", e.data.theme);
+                    if(e.data.event === "change-theme"){
+                        if( e.data.theme === "dark" )
+                            document.body.style.backgroundColor = "#1f2937";
+
+                        else if( e.data.theme === "light" )
+                            document.body.style.backgroundColor = "#f8fafc";
+                    }
                 });
 
                 clearInterval(myInterval);
