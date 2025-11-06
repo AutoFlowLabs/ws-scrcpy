@@ -110,6 +110,14 @@ body.stream {
     justify-content: start;
 }
 
+.test-execution-placeholder {
+    width: 1.6rem;
+    background-color: transparent;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 1rem;
+}
+
 .video-layer {
     position: absolute;
     z-index: 0;

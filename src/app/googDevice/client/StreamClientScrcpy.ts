@@ -319,9 +319,15 @@ export class StreamClientScrcpy
         const googToolBox = GoogToolBox.createToolBox(udid, player, this, moreBox);
         this.controlButtons = googToolBox.getHolderElement();
 
-        // Only show control buttons if testExecution is not true
+        // Show control buttons or placeholder based on testExecution mode
         if (!this.params.testExecution) {
+            // Normal mode: show actual controls
             deviceView.appendChild(this.controlButtons);
+        } else {
+            // Test execution mode: show placeholder of same size
+            const placeholder = document.createElement('div');
+            placeholder.className = 'test-execution-placeholder';
+            deviceView.appendChild(placeholder);
         }
 
         const video = document.createElement('div');
@@ -392,9 +398,7 @@ export class StreamClientScrcpy
             return;
         }
         const body = document.body;
-        // If testExecution is true, don't subtract control buttons width (they're hidden)
-        const controlsWidth = this.params.testExecution ? 0 : this.controlButtons.clientWidth;
-        const width = (body.clientWidth - controlsWidth) & ~15;
+        const width = (body.clientWidth - this.controlButtons.clientWidth) & ~15;
         const height = body.clientHeight & ~15;
         return new Size(width, height);
     }
