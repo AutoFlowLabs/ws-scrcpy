@@ -392,7 +392,9 @@ export class StreamClientScrcpy
             return;
         }
         const body = document.body;
-        const width = (body.clientWidth - this.controlButtons.clientWidth) & ~15;
+        // If testExecution is true, don't subtract control buttons width (they're hidden)
+        const controlsWidth = this.params.testExecution ? 0 : this.controlButtons.clientWidth;
+        const width = (body.clientWidth - controlsWidth) & ~15;
         const height = body.clientHeight & ~15;
         return new Size(width, height);
     }
