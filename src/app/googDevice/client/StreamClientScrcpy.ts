@@ -158,6 +158,7 @@ export class StreamClientScrcpy
             player: Util.parseString(params, 'player', true),
             udid: Util.parseString(params, 'udid', true),
             ws: Util.parseString(params, 'ws', true),
+            testExecution: Util.parseBoolean(params, 'testExecution'),
         };
     }
 
@@ -317,7 +318,12 @@ export class StreamClientScrcpy
         googMoreBox.setOnStop(stop);
         const googToolBox = GoogToolBox.createToolBox(udid, player, this, moreBox);
         this.controlButtons = googToolBox.getHolderElement();
-        deviceView.appendChild(this.controlButtons);
+
+        // Only show control buttons if testExecution is not true
+        if (!this.params.testExecution) {
+            deviceView.appendChild(this.controlButtons);
+        }
+
         const video = document.createElement('div');
         video.className = 'video';
         deviceView.appendChild(video);
